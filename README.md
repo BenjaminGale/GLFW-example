@@ -1,4 +1,4 @@
-# GLFW-example
+# Haskell GLFW Example
 
 A port of the 'Hello Triangle' tutorial from [Learn OpenGL](https://duckduckgo.com](https://learnopengl.com/Getting-started/Hello-Triangle)) to show how to get started with GLFW and OpenGL using Haskell.
 
