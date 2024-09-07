@@ -1,0 +1,35 @@
+cabal-version:  3.0
+name:           GLFW-example
+version:        1.0.0
+description:    GLFW quad rendering example
+author:         Benjamin Gale
+maintainer:     Benjamin Gale
+copyright:      2024 Benjamin Gale
+license:        Apache-2.0
+build-type:     Simple
+
+data-files:
+  app/shader.frag
+  app/shader.vert
+
+executable GLFW-example-exe
+  main-is:
+    Main.hs
+  other-modules:
+    Paths_GLFW_example
+  hs-source-dirs:
+    app
+  ghc-options:
+    -threaded
+    -rtsopts
+    -with-rtsopts=-N
+  build-depends:
+      base >=4.7 && <5
+    , GLFW-b >=3.3.9.0 && <4
+    , OpenGL >=3.0.3.0 && <4
+    , OpenGLRaw >=3.0 && <3.4
+    , StateVar >=1.2.2 && <2
+    , ObjectName >=1.1.0.2 && <2
+    , bytestring >=0.11.5.3 && <1
+  default-language:
+    Haskell2010
