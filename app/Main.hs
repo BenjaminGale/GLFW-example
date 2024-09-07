@@ -56,24 +56,15 @@ run window = do
   GLFW.setFramebufferSizeCallback window (Just resizeViewport)
   resizeViewport window 800 600
 
-  program <- createShaderProgram
+  program <- createProgram
   mainLoop window program
 
   GLFW.terminate
 
-createShaderProgram :: IO GL.Program
-createShaderProgram = do
-  vertexShader <- GL.createShader GL.VertexShader
-  shaderPath <- getDataFileName "app/shader.vert"
-  vertexShaderData <- BS.readFile shaderPath
-  GL.shaderSourceBS vertexShader $= vertexShaderData
-  GL.compileShader vertexShader
-
-  fragmentShader <- GL.createShader GL.FragmentShader
-  shaderPath <- getDataFileName "app/shader.frag"
-  fragmentShaderData <- BS.readFile shaderPath
-  GL.shaderSourceBS fragmentShader $= fragmentShaderData
-  GL.compileShader fragmentShader
+createProgram :: IO GL.Program
+createProgram = do
+  vertexShader <- createShader "app/shader.vert" GL.VertexShader
+  fragmentShader <- createShader "app/shader.frag" GL.FragmentShader
 
   program <- GL.createProgram
   GL.attachShader program vertexShader
@@ -99,6 +90,15 @@ createShaderProgram = do
     GL.bufferData GL.ElementArrayBuffer $= (fromIntegral (len * sizeOf (1 :: GL.GLint)), ptr , GL.StaticDraw)
 
   return program
+
+createShader :: FilePath -> GL.ShaderType -> IO GL.Shader
+createShader filePath shaderType = do
+  shader <- GL.createShader shaderType
+  shaderFile <- getDataFileName filePath
+  shaderData <- BS.readFile shaderFile
+  GL.shaderSourceBS shader $= shaderData
+  GL.compileShader shader
+  return shader
 
 mainLoop :: GLFW.Window -> GL.Program -> IO ()
 mainLoop window program = do
