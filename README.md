@@ -2,7 +2,7 @@
 
 A port of the 'Hello Triangle' tutorial from [Learn OpenGL](https://duckduckgo.com](https://learnopengl.com/Getting-started/Hello-Triangle)) to show how to get started with GLFW and OpenGL using Haskell.
 
-![Screenshot](https://github.com/user-attachments/assets/b7fe14cf-3ea5-4aaf-88ef-da3d6dabf767)
+![screenshot](https://github.com/user-attachments/assets/8848abf8-c24d-4248-a65e-fb3e86fbdb45)
 
 ## Running
 
