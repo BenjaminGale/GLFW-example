@@ -53,8 +53,7 @@ main = do
 run :: GLFW.Window -> IO ()
 run window = do
   GLFW.makeContextCurrent $ Just window
-  GLFW.setFramebufferSizeCallback window (Just resizeViewport)
-  resizeViewport window 800 600
+  GLFW.setFramebufferSizeCallback window $ Just resizeViewport
 
   program <- createProgram
   mainLoop window program
@@ -104,7 +103,7 @@ mainLoop :: GLFW.Window -> GL.Program -> IO ()
 mainLoop window program = do
   shouldClose <- GLFW.windowShouldClose window
   unless shouldClose $ do
-    GL.clearColor $= (GL.Color4 0.2 0.3 0.3 1.0)
+    GL.clearColor $= GL.Color4 0.2 0.3 0.3 1.0
     GL.clear [GL.ColorBuffer]
 
     GL.currentProgram $= Just program
