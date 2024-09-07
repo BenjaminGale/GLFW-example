@@ -103,6 +103,8 @@ mainLoop :: GLFW.Window -> GL.Program -> IO ()
 mainLoop window program = do
   shouldClose <- GLFW.windowShouldClose window
   unless shouldClose $ do
+    processInput window
+
     GL.clearColor $= GL.Color4 0.2 0.3 0.3 1.0
     GL.clear [GL.ColorBuffer]
 
@@ -112,3 +114,9 @@ mainLoop window program = do
     GLFW.swapBuffers window
     GLFW.pollEvents
     mainLoop window program
+
+processInput :: GLFW.Window -> IO ()
+processInput window = do
+  key <- GLFW.getKey window GLFW.Key'Escape
+  when (key == GLFW.KeyState'Pressed) $ do
+    GLFW.setWindowShouldClose window True
